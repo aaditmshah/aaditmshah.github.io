@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include head.html %}
+    <body>
+        {% include header.html %}
+        {% for page in site.posts %}
+        <article>
+            {% include hgroup.html %}
+            {{ page.excerpt }}
+        </article>
+        {% endfor %}
+    </body>
+</html>
