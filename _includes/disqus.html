@@ -11,4 +11,11 @@
                     script.async = true;
                     return script;
                 }());
+
+                document.body.appendChild(function () {
+                    var script = document.createElement("script");
+                    script.src = "http://" + disqus_shortname + ".disqus.com/count.js";
+                    script.async = true;
+                    return script;
+                }());
             </script>
