@@ -27,7 +27,7 @@ article {
     width: 40em;
 }
 
-hgroup a {
+header a, hgroup a {
     color: #000000;
     text-decoration: none;
 }
