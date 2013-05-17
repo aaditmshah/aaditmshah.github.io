@@ -1,0 +1,30 @@
+{% if site.related_posts.size > 0 %}
+<nav>
+            <h1>Related Posts</h1>
+            <ul>
+                {% for post in site.related_posts %}
+                <li><h3><a href="{{ post.url }}">{{ post.title }}</a></h3></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+        {% if page.categories.size > 0 %}
+        <nav>
+            <h1>Categories</h1>
+            <ul>
+                {% for category in page.categories %}
+                <li><h3>{{ category }}</h3></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+        {% if page.tags.size > 0 %}
+        <nav>
+            <h1>Tags</h1>
+            <ul>
+                {% for tag in page.tags %}
+                <li><h3>{{ tag }}</h3></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
