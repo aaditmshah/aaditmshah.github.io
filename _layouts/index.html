@@ -3,12 +3,14 @@
     {% include head.html %}
     <body>
         {% include header.html %}
-        {% for page in site.posts %}
-        <article>
-            {% include hgroup.html %}
-            {{ page.excerpt }}
-        </article>
+        <div id="content">
+            {% for page in site.posts %}
+            <article>
+                {% include hgroup.html %}
+                {{ page.excerpt }}
+            </article>
         {% endfor %}
+        </div>
         {% include nav.html %}
         {% include count.html %}
     </body>

@@ -32,12 +32,16 @@ img {
     border-radius: 1em;
 }
 
-article {
+#content {
     position: absolute;
+}
+
+article {
     width: 40em;
 }
 
-header a, hgroup a, nav a {
+a {
+    border-bottom: 1px dotted #000000;
     color: #000000;
     text-decoration: none;
 }

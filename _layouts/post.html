@@ -3,12 +3,14 @@
     {% include head.html %}
     <body>
         {% include header.html %}
-        <article>
-            {% include hgroup.html %}
-            {{ content }}
-            <h2>Comments</h2>
-            {% include disqus.html %}
-        </article>
+        <div id="content">
+            <article>
+                {% include hgroup.html %}
+                {{ content }}
+                <h2>Comments</h2>
+                {% include disqus.html %}
+            </article>
+        </div>
         {% include links.html %}
     </body>
 </html>
