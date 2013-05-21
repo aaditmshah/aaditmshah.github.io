@@ -108,7 +108,7 @@ According to this law, TC39 (the ECMAScript design committee) must have spent tw
 
 See, the original syntax for Harmony classes (simply called [classes](http://wiki.ecmascript.org/doku.php?id=harmony:classes "harmony:classes [ES Wiki]")) was considered too verbose. Hence they came up with a new syntax and called it [minimal classes](http://wiki.ecmascript.org/doku.php?id=strawman:minimal_classes "strawman:minimal_classes [ES Wiki]"). Being yet dissatisfied they simplified the syntax even further, calling it [maximally minimal classes](http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes "strawman:maximally_minimal_classes [ES Wiki]"). Fortunately they ran out of superlatives so I believe that this is the final syntax. Let's cross our fingers and pray it doesn't change.
 
-Unfortunately they spent too much time deciding on the syntax of the language and too little time on the actual semantics. Hence although we have _maximally mimimal syntax_ yet we have _maximally inconsistent semantics_. Semantics is much more important than syntax. Ask any LISP programmer. JavaScript semantics is much more important because it must be backwards compatible and easy to read, write and understand.
+Unfortunately they spent too much time deciding on the syntax of the language and too little time on the actual semantics. Hence although we have _maximally mimimal syntax_ yet we have _maximally brittle semantics_. Semantics is much more important than syntax. Ask any LISP programmer. JavaScript semantics is much more important because it must be backwards compatible and easy to read, write and understand.
 
 ## New Semantics for Maximally Minimal Classes ##
 
