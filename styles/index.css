@@ -54,7 +54,7 @@ hgroup h5 {
     margin-top: 0;
 }
 
-article p:first-of-type:first-letter {
+article>p:first-of-type:first-letter {
     float: left;
     font-size: 4em;
     padding: 0.125em;
@@ -68,4 +68,5 @@ p {
 
 code {
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    font-size: 0.888em;
 }
