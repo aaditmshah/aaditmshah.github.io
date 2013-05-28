@@ -1,3 +1,7 @@
+html {
+    min-width: 80em;
+}
+
 body {
     font-family: "Georgia Pro", Georgia, serif;
     font-size: 18px;
