@@ -22,7 +22,7 @@ nav ul {
     list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, th {
     font-family: "Franklin ITC Pro Bold", sans-serif;
 }
 
@@ -61,10 +61,27 @@ article>p:first-of-type:first-letter {
 }
 
 p {
-    line-height: 1.5em;
     text-align: justify;
+}
+
+li, p {
+    line-height: 1.5em;
+}
+
+li p {
+    margin: 0;
 }
 
 code {
     font-family: "Anonymous Pro", monospace;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 1em;
+    width: 50%;
 }
