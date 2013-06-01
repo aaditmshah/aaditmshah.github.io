@@ -1,0 +1,18 @@
+<script>
+            var GoogleAnalyticsObject = "ga";
+
+            document.body.appendChild(function () {
+                var script = document.createElement("script");
+                script.src = "http://www.google-analytics.com/analytics.js";
+                script.async = true;
+                ga.l =+ new Date;
+                return script;
+            }());
+
+            ga("create", "UA-41391440-1", "aaditmshah.github.io");
+            ga("send", "pageview");
+
+            function ga() {
+                (ga.q || (ga.q = [])).push(arguments);
+            }
+        </script>
