@@ -64,6 +64,10 @@ article>p:first-of-type:first-letter {
     padding-top: 0.25em;
 }
 
+article img {
+    width: 38em;
+}
+
 p {
     text-align: justify;
 }

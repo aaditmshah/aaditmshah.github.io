@@ -5,9 +5,18 @@ categories: [tutorial, abstraction, object-oriented, functional, polymorphism]
 tags: [JavaScript, Rule of Three]
 published: false
 ---
-Last week I wrote about [prototypal inheritance in JavaScript](/why-prototypal-inheritance-matters "Aadit M Shah | Why Prototypal Inheritance Matters"). I explained that it's used to bridge the gap between object-oriented and functional programming. This week I'll demonstrate how to write code that leverages the benefits of both these programming paradigms effectively. I'll explain how to develop an intuition for recognizing patterns in JavaScript, and claim mastery over the language by abstracting them out.
+Last time I wrote about [prototypal inheritance in JavaScript](/why-prototypal-inheritance-matters "Aadit M Shah | Why Prototypal Inheritance Matters"). I explained that it's used to bridge the gap between object-oriented and functional programming. This time I'll demonstrate how to write code that leverages the benefits of both these programming paradigms effectively. I'll explain how to develop an intuition for recognizing patterns in JavaScript, and claim mastery over the language by abstracting them out.
 
 Abstraction is the most important principle of programming. It's also the most difficult concept to master. Nevertheless there are hardly any tutorials on abstraction. Nobody teaches you how to recognize and abstract out patterns in your code. Programmers are expected to know how to do it. Most people believe that the intuition for abstracting out patterns is innate - something that you either lack, or possess. This is false.
+
+__Contents__
+
+1. [An Appetizer for Abstraction](#an_appetizer_for_abstraction)
+2. [Generalization: From Concrete to Abstract](#generalization_from_concrete_to_abstract)
+3. [The Ws of Abstraction](#the_ws_of_abstraction)
+   1. [What to Abstract Out?](#what_to_abstract_out)
+   2. [When to Abstract Out?](#when_to_abstract_out)
+   3. [Why to Abstract Out?](#why_to_abstract_out)
 
 ## An Appetizer for Abstraction ##
 
@@ -155,3 +164,14 @@ forEach([2, 3, 5, 7], function (prime) {
 });
 {% endhighlight %}
 
+## The Ws of Abstraction ##
+
+Now that you have a basic understanding of _how_ to abstract out functions let's get down to the [_what_, _when_ and _why_](https://en.wikipedia.org/wiki/Five_Ws "Five Ws - Wikipedia, the free encyclopedia") of abstraction. It seems a little silly for me to teach this topic simply because as human beings we constantly find patterns in everything - either consciously, subconsciously or unconsciously. Abstraction comes to us as naturally as breathing. We can not prevent ourselves from abstracting out patterns.
+
+### What to Abstract Out? ###
+
+When I talk about abstraction what do you envision yourself doing? What is it precisely that you're abstracting out? Until now I abstractly defined abstraction as the process of recognizing patterns and abstracting them out. 
+
+### When to Abstract Out? ###
+
+### Why to Abstract Out? ###
