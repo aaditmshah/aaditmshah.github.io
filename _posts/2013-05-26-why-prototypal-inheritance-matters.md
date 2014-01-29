@@ -245,7 +245,7 @@ Square.prototype = Object.create(Rectangle.prototype);
 
 Square.prototype.constructor = Square;
 
-var sq = square.create(5);
+var sq = new Square(5);
 
 alert(sq.area());
 {% endhighlight %}
