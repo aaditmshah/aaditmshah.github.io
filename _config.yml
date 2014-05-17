@@ -1,3 +1,4 @@
+markdown:  kramdown
 timezone:  Asia/Kolkata
 permalink: /:title/
 lsi:       true
