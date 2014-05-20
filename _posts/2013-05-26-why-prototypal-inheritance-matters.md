@@ -4,7 +4,7 @@ title: Why Prototypal Inheritance Matters
 categories: [tutorial, object-oriented, functional]
 tags: [JavaScript, Prototypal Inheritance]
 ---
-Five days ago I wrote [Standardizing Harmony Classes](/standardizing-harmony-classes "Aadit M Shah \| Standardizing Harmony Classes"). It showed how to simulate classes in current JavaScript implementations and how [ECMAScript Harmony classes](http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes "strawman:maximally_minimal_classes [ES Wiki]") are just syntactic sugar for the same. My programming style has evolved since then, thanks to [Om Shankar](http://geekyogi.tumblr.com/ "Geek Yogi") and the awesome members of the [JavaScript Room](http://rlemon.github.io/so-chat-javascript-rules/ "Javascript: Unofficial Room Rules"); and like [Douglas Crockford](http://www.crockford.com/ "Douglas Crockford's Wrrrld Wide Web") did [back in 2006](http://javascript.crockford.com/prototypal.html "Prototypal Inheritance"), I too have learned to fully embrace prototypalism.
+Five days ago I wrote [Standardizing Harmony Classes](/standardizing-harmony-classes "Aadit M Shah | Standardizing Harmony Classes"). It showed how to simulate classes in current JavaScript implementations and how [ECMAScript Harmony classes](http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes "strawman:maximally_minimal_classes [ES Wiki]") are just syntactic sugar for the same. My programming style has evolved since then, thanks to [Om Shankar](http://geekyogi.tumblr.com/ "Geek Yogi") and the awesome members of the [JavaScript Room](http://rlemon.github.io/so-chat-javascript-rules/ "Javascript: Unofficial Room Rules"); and like [Douglas Crockford](http://www.crockford.com/ "Douglas Crockford's Wrrrld Wide Web") did [back in 2006](http://javascript.crockford.com/prototypal.html "Prototypal Inheritance"), I too have learned to fully embrace prototypalism.
 
 You see JavaScript is a multi-paradigm programming language. It has both object-oriented and functional features, which means that you can write programs using both these styles. However these two paradigms don't mix well. For example it's [not possible](http://stackoverflow.com/q/1606797/783743 "javascript - Use of .apply() with 'new' operator. Is this possible? - Stack Overflow") to use `new` (a classical object-oriented feature) with `apply` (a functional feature). Prototypal inheritance is used to bridge this gap.
 
@@ -112,7 +112,7 @@ Hence I advise you to stop using the `new` keyword. JavaScript has a much more p
 
 ## Understanding Prototypal Inheritance ##
 
-[Prototypal inheritance](http://en.wikipedia.org/wiki/Prototype-based_programming "Prototype-based programming - Wikipedia, the free encyclopedia") is simple. In prototypal languages you only have objects. No classes. There are two ways to create new objects - [_ex nihilo_](http://en.wikipedia.org/wiki/Ex_nihilo "Ex nihilo - Wikipedia, the free encyclopedia") ("out of nothing") object creation or through cloning an existing object. In JavaScript the [`Object.create`](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/create "Object.create - JavaScript \| MDN") function ([discovered](http://javascript.crockford.com/prototypal.html "Prototypal Inheritance") by Douglas Crockford) is used to create new objects. Newly created objects are then extended with new properties.
+[Prototypal inheritance](http://en.wikipedia.org/wiki/Prototype-based_programming "Prototype-based programming - Wikipedia, the free encyclopedia") is simple. In prototypal languages you only have objects. No classes. There are two ways to create new objects - [_ex nihilo_](http://en.wikipedia.org/wiki/Ex_nihilo "Ex nihilo - Wikipedia, the free encyclopedia") ("out of nothing") object creation or through cloning an existing object. In JavaScript the [`Object.create`](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/create "Object.create - JavaScript | MDN") function ([discovered](http://javascript.crockford.com/prototypal.html "Prototypal Inheritance") by Douglas Crockford) is used to create new objects. Newly created objects are then extended with new properties.
 
 ### Ex Nihilo Object Creation ###
 
@@ -264,7 +264,7 @@ Object.prototype.extend = function (extension) {
     var object = Object.create(this);
 
     for (var property in extension)
-        if (hasOwnProperty.call(extension, property) \|\|
+        if (hasOwnProperty.call(extension, property) ||
             typeof object[property] === "undefined")
                 object[property] = extension[property];
 
@@ -312,7 +312,7 @@ Some of you may have noticed that the object returned by the `extend` function a
 
 #### Delegation or Differential Inheritance ####
 
-Most JavaScript programmers are [familiar](http://stackoverflow.com/a/572996/783743 "dynamic languages - How does JavaScript .prototype work? - Stack Overflow") [with](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Inheritance_and_the_prototype_chain "Inheritance and the prototype chain - JavaScript \| MDN") [differential](https://en.wikipedia.org/wiki/Differential_inheritance "Differential inheritance - Wikipedia, the free encyclopedia") [inheritance](http://en.wikipedia.org/wiki/Prototype-based_programming#Delegation "Prototype-based programming - Wikipedia, the free encyclopedia"). To quote from Wikipedia:
+Most JavaScript programmers are [familiar](http://stackoverflow.com/a/572996/783743 "dynamic languages - How does JavaScript .prototype work? - Stack Overflow") [with](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Inheritance_and_the_prototype_chain "Inheritance and the prototype chain - JavaScript | MDN") [differential](https://en.wikipedia.org/wiki/Differential_inheritance "Differential inheritance - Wikipedia, the free encyclopedia") [inheritance](http://en.wikipedia.org/wiki/Prototype-based_programming#Delegation "Prototype-based programming - Wikipedia, the free encyclopedia"). To quote from Wikipedia:
 
 > It operates on the principle that most objects are derived from other, more general objects, and only differ in a few small aspects; while usually maintaining a list of pointers internally to other objects which the object differs from.
 
@@ -329,7 +329,7 @@ function get(object, property) {
 }
 {% endhighlight %}
 
-If the [member operators](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Operators/Member_Operators "Member Operators - JavaScript \| MDN") in JavaScript were functions they would be implemented as shown in the program above. It shows how property access is delegated to the `prototype` of an object if it's not found the object itself.
+If the [member operators](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Operators/Member_Operators "Member Operators - JavaScript | MDN") in JavaScript were functions they would be implemented as shown in the program above. It shows how property access is delegated to the `prototype` of an object if it's not found the object itself.
 
 #### Cloning or Concatenative Inheritance ####
 
@@ -371,7 +371,7 @@ Object.prototype.extend = function () {
         var extension = arguments[length - (index--)];
 
         for (var property in extension)
-            if (hasOwnProperty.call(extension, property) \|\|
+            if (hasOwnProperty.call(extension, property) ||
                 typeof object[property] === "undefined")
                     object[property] = extension[property];
     }
@@ -513,7 +513,7 @@ Blueprints are unique to JavaScript. They are a powerful feature. However they h
 
 ### Fixing the instanceof Operator ###
 
-Many JavaScript programmers would argue that using the prototypal pattern for inheritance is against the spirit of the language. They favor the constructor pattern because they believe that objects created using constructors are actual "instances", since the `instanceof` operator yields `true`. However, this [argument is moot](http://stackoverflow.com/a/8096017/783743 "JavaScript inheritance and the constructor property - Stack Overflow") because the `instanceof` operator can be [implemented in JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model#Determining_instance_relationships "Details of the object model - JavaScript \| MDN") as follows:
+Many JavaScript programmers would argue that using the prototypal pattern for inheritance is against the spirit of the language. They favor the constructor pattern because they believe that objects created using constructors are actual "instances", since the `instanceof` operator yields `true`. However, this [argument is moot](http://stackoverflow.com/a/8096017/783743 "JavaScript inheritance and the constructor property - Stack Overflow") because the `instanceof` operator can be [implemented in JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model#Determining_instance_relationships "Details of the object model - JavaScript | MDN") as follows:
 
 {% highlight javascript linenos %}
 Object.prototype.instanceof = function (prototype) {
@@ -548,7 +548,7 @@ Object.prototype.extend = function () {
 
         for (var property in extension)
             if (property !== "clones" &&
-                hasOwnProperty.call(extension, property) \|\|
+                hasOwnProperty.call(extension, property) ||
                 typeof object[property] === "undefined")
                     object[property] = extension[property];
 
@@ -570,7 +570,7 @@ Object.prototype.instanceof = function (prototype) {
     var object = this;
 
     do {
-        if (object === prototype \|\|
+        if (object === prototype ||
             clones && clones.indexOf(object) >= 0)
                 return true;
 
@@ -709,5 +709,5 @@ Congratulations. If you read through this entire blog post and understood what I
 6. [Stop Using Constructor Functions in JavaScript](http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/ "Stop Using Constructor Functions in JavaScript «  Eric Elliott – JavaScript Architect (A JavaScript Blog)")
 7. [JavaScript Constructor Functions vs Factory Functions](http://ericleads.com/2013/01/javascript-constructor-functions-vs-factory-functions/ "JavaScript Constructor Functions vs Factory Functions «  Eric Elliott – JavaScript Architect (A JavaScript Blog)")
 8. [Fluent JavaScript – Three Different Kinds of Prototypal OO](http://ericleads.com/2013/02/fluent-javascript-three-different-kinds-of-prototypal-oo/ "Fluent JavaScript – Three Different Kinds of Prototypal OO «  Eric Elliott – JavaScript Architect (A JavaScript Blog)")
-9. [Details of the object model](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model#Determining_instance_relationships "Details of the object model - JavaScript \| MDN")
+9. [Details of the object model](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model#Determining_instance_relationships "Details of the object model - JavaScript | MDN")
 10. [Prototype-based programming](http://en.wikipedia.org/wiki/Prototype-based_programming "Prototype-based programming - Wikipedia, the free encyclopedia")
