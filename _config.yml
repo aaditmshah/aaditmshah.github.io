@@ -2,3 +2,5 @@ markdown:  redcarpet
 timezone:  Asia/Kolkata
 permalink: /:title/
 lsi:       true
+redcarpet:
+    extensions: [with_toc_data]
