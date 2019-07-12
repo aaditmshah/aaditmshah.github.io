@@ -238,7 +238,7 @@ alert(sq.area());
 It's easy to understand what's happening here. First we create a clone of `rectangle` and call it `square`. Next we override the `create` function of `square` with a new `create` function. Finally we `call` the `create` function of `rectangle` from the new `create` function and `return` the object is returns. In constrast prototypal inheritance using constructors looks like this:
 
 {% highlight javascript linenos %}
-function Square() {
+function Square(side) {
     Rectangle.call(this, side, side);
 }
 
