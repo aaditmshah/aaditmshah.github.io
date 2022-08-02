@@ -4,6 +4,6 @@ Thank you to all the wonderful people and companies sponsoring my work so that I
 
 ![Endearing picture of a cat begging for food.](gratitude-249x249-priority "Thank you so much for your love and support.")
 
-## Followers [$9/month](/sponsors)
+## Followers [$9/month](/sponsor)
 
 - [Priyanshi Shah](https://github.com/ps3296)
