@@ -5,3 +5,7 @@
 #__next {
   @apply h-full;
 }
+
+h2 > a {
+  @apply text-sm;
+}

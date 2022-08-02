@@ -4,7 +4,11 @@ import { assets } from "../../assets";
 
 const assetFormat = /^(\w+)-(\d+)x(\d+)(-priority)?$/;
 
-export const Img: NormalComponents["img"] = ({ src = "", alt }) => {
+export const Img: NormalComponents["img"] = ({
+  src = "",
+  alt = "",
+  title = "",
+}) => {
   const result = assetFormat.exec(src);
 
   if (result === null) throw new Error("asset format invalid");
@@ -18,14 +22,14 @@ export const Img: NormalComponents["img"] = ({ src = "", alt }) => {
     <figure className="mt-4 text-center">
       <Image
         src={asset}
-        alt=""
+        alt={alt}
         width={width}
         height={height}
         quality={100}
         layout="fixed"
         priority={priority}
       />
-      <figcaption>{alt}</figcaption>
+      <figcaption>{title}</figcaption>
     </figure>
   );
 };
