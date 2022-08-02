@@ -1,14 +1,26 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import path from "path";
+import { promises as fs } from "fs";
+import type { NextPage, GetStaticProps } from "next";
+import { Markdown } from "../components";
 
-const Patrons: NextPage = () => {
+interface PatronsProps {
+  content: string;
+}
+
+const Patrons: NextPage<PatronsProps> = ({ content }) => {
   return (
-    <>
-      <Head>
-        <title>Patrons - Aadit M Shah</title>
-      </Head>
-    </>
+    <div className="h-full flex justify-center items-center">
+      <article className="max-w-2xl px-8 py-8 sm:px-4">
+        <Markdown content={content} />
+      </article>
+    </div>
   );
+};
+
+export const getStaticProps: GetStaticProps<PatronsProps> = async () => {
+  const fileName = path.join(process.cwd(), "content/patrons.md");
+  const content = await fs.readFile(fileName, "utf8");
+  return { props: { content } };
 };
 
 export default Patrons;

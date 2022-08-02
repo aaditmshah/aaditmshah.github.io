@@ -1,7 +1,7 @@
 import path from "path";
 import { promises as fs } from "fs";
 import type { NextPage, GetStaticProps } from "next";
-import { Markdown } from "../components/markdown";
+import { Markdown } from "../components";
 
 interface AboutProps {
   content: string;
