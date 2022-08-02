@@ -12,4 +12,4 @@ If you use [my open-source code](https://github.com/aaditmshah) or if you read m
 
 ## One-time sponsorship
 
-- Buy Me A Coffee
+- [Buy Me a Coffee](https://www.buymeacoffee.com/aaditmshah)
