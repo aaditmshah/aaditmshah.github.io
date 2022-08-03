@@ -7,9 +7,9 @@ If you use [my open-source code](https://github.com/aaditmshah) or if you read m
 ## Monthly sponsorship
 
 - [GitHub Sponsors](https://github.com/sponsors/aaditmshah)
-- Open Collective
-- Patreon
+- [Open Collective](https://opencollective.com/aaditmshah)
+- [Patreon](https://www.patreon.com/aaditmshah)
 
 ## One-time sponsorship
 
-- [Buy Me a Coffee](https://www.buymeacoffee.com/aaditmshah)
+- [Buy me a coffee](https://www.buymeacoffee.com/aaditmshah)
