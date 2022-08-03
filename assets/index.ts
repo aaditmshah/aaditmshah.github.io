@@ -1,4 +1,4 @@
 import type { StaticImageData } from "next/image";
-import gratitude from "./gratitude.webp";
+import aaditmshah from "./aaditmshah.webp";
 
-export const assets: Record<string, StaticImageData> = { gratitude };
+export const assets: Record<string, StaticImageData> = { aaditmshah };
