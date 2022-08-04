@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { assets } from "../assets";
+import aaditmshah from "../assets/aaditmshah.webp";
 
 const Home: NextPage = () => {
   return (
     <article className="h-full flex flex-col justify-center items-center text-center p-4">
       <header className="flex flex-col items-center">
         <Image
-          src={assets.aaditmshah || ""}
+          src={aaditmshah}
           alt="Profile Picture of Aadit M Shah"
           width={220}
           height={220}

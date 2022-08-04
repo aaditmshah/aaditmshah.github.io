@@ -2,7 +2,7 @@ import type { NormalComponents } from "react-markdown/lib/complex-types";
 import Image from "next/image";
 import { assets } from "../../assets";
 
-const assetFormat = /^([\/\w.]+)-(\d+)x(\d+)(-priority)?$/;
+const assetFormat = /^(\w+)-(\d+)x(\d+)(-priority)?$/;
 
 export const Img: NormalComponents["img"] = ({
   src = "",
@@ -21,7 +21,7 @@ export const Img: NormalComponents["img"] = ({
   return (
     <figure className="mt-4 text-center">
       <Image
-        src={assets[key] || key}
+        src={assets[key] || ""}
         alt={alt}
         width={width}
         height={height}
