@@ -11,7 +11,7 @@ import aaditmshah from "../assets/aaditmshah.webp";
 
 const Home: NextPage = () => {
   return (
-    <article className="h-full flex flex-col justify-center items-center text-center p-4">
+    <article className="max-w-full h-full flex flex-col justify-center items-center text-center p-4">
       <header className="flex flex-col items-center">
         <Image
           src={aaditmshah}
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           width={220}
           height={220}
           quality={100}
-          layout="fixed"
+          layout="intrinsic"
           className="rounded-full"
           priority
         />

@@ -7,7 +7,7 @@ import Head from "next/head";
 const Contact: NextPage = () => {
   return (
     <div className="h-full flex justify-center items-center">
-      <article className="max-w-xl p-4">
+      <article className="max-w-full p-8">
         <header>
           <Head>
             <title>Contact - Aadit M Shah</title>

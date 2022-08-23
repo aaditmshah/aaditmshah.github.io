@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const mainNav = Object.entries({
     Home: "/",
-    Blog: "/blog",
+    Blog: "/blog/page/1",
     Sponsor: "/sponsor",
     Patrons: "/patrons",
     About: "/about",
@@ -28,36 +28,40 @@ function MyApp({ Component, pageProps }: AppProps) {
               <span className="text-orange">Codes</span>
             </h1>
           </header>
-          <nav className="flex gap-x-1 overflow-x-scroll sm:overflow-x-auto text-dark">
+          <nav className="flex gap-x-1 overflow-x-scroll sm:overflow-x-auto no-scrollbar text-dark">
             <h1 className="sr-only">Main Navigation</h1>
-            {mainNav.map(([name, href], index) => {
-              return (
-                <Link key={name} href={href}>
-                  <a
-                    className={classNames(
-                      "px-2 py-1 rounded-t-md text-sm sm:mt-4 sm:text-base font-bold",
-                      router.pathname === href
-                        ? "bg-yellow"
-                        : "bg-orange hover:bg-yellow",
-                      {
-                        "ml-auto": index === 0,
-                        "mr-auto": index === mainNav.length - 1,
-                      }
-                    )}
-                  >
-                    <h2>{name}</h2>
-                  </a>
-                </Link>
-              );
-            })}
+            {mainNav.map(([name, href], index) => (
+              <Link key={name} href={href}>
+                <a
+                  className={classNames(
+                    "px-2 py-1 rounded-t-md text-sm sm:mt-4 sm:text-base font-bold",
+                    href === router.pathname ||
+                      (router.pathname === "/[page]" &&
+                        href === `/${router.query.page}`) ||
+                      (href === "/blog/page/1" &&
+                        router.pathname.startsWith("/blog/"))
+                      ? "bg-yellow"
+                      : "bg-orange hover:bg-yellow",
+                    {
+                      "ml-auto": index === 0,
+                      "mr-auto": index === mainNav.length - 1,
+                    }
+                  )}
+                >
+                  <h2>{name}</h2>
+                </a>
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
       <div className="grow flex justify-center text-dark bg-yellow">
-        <div className="grow flex sm:max-w-3xl">
-          <main className="grow rounded-md mx-2 my-4 bg-white">
-            <Component {...pageProps} />
-          </main>
+        <div className="grow flex max-w-full sm:max-w-3xl">
+          <div className="grow flex max-w-full px-2 py-4">
+            <main className="grow max-w-full rounded-md bg-white">
+              <Component {...pageProps} />
+            </main>
+          </div>
         </div>
       </div>
       <footer className="py-2 text-sm text-center text-yellow bg-dark">

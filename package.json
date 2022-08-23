@@ -22,10 +22,16 @@
     "postcss": "8.4.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-markdown": "8.0.3",
+    "rehype-react": "7.1.1",
+    "remark-frontmatter": "4.0.1",
+    "remark-parse": "10.0.1",
+    "remark-rehype": "10.1.0",
     "remark-unwrap-images": "3.0.1",
     "sharp": "0.30.7",
-    "tailwindcss": "3.1.6"
+    "simple-git": "3.11.0",
+    "tailwindcss": "3.1.6",
+    "unified": "10.1.2",
+    "yaml": "2.1.1"
   },
   "devDependencies": {
     "@svgr/webpack": "6.3.0",
