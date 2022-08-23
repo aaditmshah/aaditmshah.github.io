@@ -1,5 +1,5 @@
-import simpleGit from "simple-git";
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
+import { simpleGit } from "simple-git";
 
 interface Timestamps {
   published: number;

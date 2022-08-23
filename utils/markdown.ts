@@ -1,12 +1,12 @@
 import { parse } from "yaml";
-import { string, array, object } from "./decoders";
 import type { MarkdownContent } from "../components";
+import { string, array, object } from "./decoders";
 
 const decoder = object({ title: string, tags: array(string) });
 
-export const markdown = /(.+)\.md$/;
+const markdown = /(?<filename>.+)\.md$/u;
 
-export const getTitle = ({ children: [heading] }: MarkdownContent) => {
+const getTitle = ({ children: [heading] }: MarkdownContent) => {
   if (typeof heading === "undefined" || heading.type !== "heading") {
     throw new Error("heading missing");
   }
@@ -20,8 +20,8 @@ export const getTitle = ({ children: [heading] }: MarkdownContent) => {
   return text.value;
 };
 
-export const getPostData = ({
-  children: [frontmatter, abstract],
+const getPostData = ({
+  children: [frontmatter, abstract]
 }: MarkdownContent) => {
   if (typeof frontmatter === "undefined" || frontmatter.type !== "yaml") {
     throw new Error("front matter missing");
@@ -30,6 +30,11 @@ export const getPostData = ({
     throw new Error("abstract missing");
   }
   const { title, tags } = decoder.decode(parse(frontmatter.value));
-  const summary: MarkdownContent = { type: "root", children: [abstract] };
+  const summary: MarkdownContent = {
+    type: "root",
+    children: [abstract]
+  };
   return { title, tags, summary };
 };
+
+export { markdown, getTitle, getPostData };

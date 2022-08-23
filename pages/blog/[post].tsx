@@ -1,57 +1,55 @@
-import path from "path";
-import { promises as fs } from "fs";
-import type { ParsedUrlQuery } from "querystring";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import type { MarkdownContent, MetaDataProps } from "../../components";
+import type { MarkdownContent, MetaDataProperties } from "../../components";
 import { Markdown, parseMarkdown, MetaData } from "../../components";
-import { getPostData, markdown } from "../../utils/markdown";
 import { getTimestamps } from "../../utils/date";
+import { getPostData, markdown } from "../../utils/markdown";
 
-interface PostParams extends ParsedUrlQuery {
+interface PostParameters extends ParsedUrlQuery {
   post: string;
 }
 
-interface PostProps extends MetaDataProps {
+interface PostProperties extends MetaDataProperties {
   title: string;
   content: MarkdownContent;
 }
 
-const Post: NextPage<PostProps> = ({
+const Post: NextPage<PostProperties> = ({
   title,
   content,
   published,
   modified,
-  tags,
-}) => {
-  return (
-    <div className="h-full flex justify-center items-center">
-      <article className="max-w-full p-8">
-        <header>
-          <Head>
-            <title>{title}</title>
-          </Head>
-          <h1 className="text-3xl font-bold">{title}</h1>
-          <MetaData published={published} modified={modified} tags={tags} />
-        </header>
-        <Markdown content={content} />
-      </article>
-    </div>
-  );
-};
+  tags
+}: PostProperties) => (
+  <div className="h-full flex justify-center items-center">
+    <article className="max-w-full p-8">
+      <header>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <h1 className="text-3xl font-bold">{title}</h1>
+        <MetaData published={published} modified={modified} tags={tags} />
+      </header>
+      <Markdown content={content} />
+    </article>
+  </div>
+);
 
-export const getStaticPaths: GetStaticPaths<PostParams> = async () => {
-  const dirPath = path.join(process.cwd(), "content/blog");
-  const fileNames = await fs.readdir(dirPath);
+const getStaticPaths: GetStaticPaths<PostParameters> = async () => {
+  const directoryPath = path.join(process.cwd(), "content/blog");
+  const fileNames = await fs.readdir(directoryPath);
   const paths: { params: { post: string } }[] = [];
   for (const fileName of fileNames) {
     const result = markdown.exec(fileName);
-    if (result !== null) paths.push({ params: { post: result[1] || "" } });
+    if (result !== null) paths.push({ params: { post: result[1] ?? "" } });
   }
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<PostProps, PostParams> = async (
+const getStaticProps: GetStaticProps<PostProperties, PostParameters> = async (
   context
 ) => {
   const name = context.params?.post;
@@ -65,4 +63,5 @@ export const getStaticProps: GetStaticProps<PostProps, PostParams> = async (
   return { props: { title, content, published, modified, tags } };
 };
 
+export { getStaticPaths, getStaticProps };
 export default Post;

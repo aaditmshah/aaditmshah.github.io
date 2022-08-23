@@ -1,4 +1,5 @@
 // @ts-check
+"use strict";
 
 /**
  * @type {import('next').NextConfig}
@@ -8,16 +9,16 @@ const nextConfig = {
   swcMinify: true,
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      test: /\.svg$/u,
+      use: ["@svgr/webpack"]
     });
     return config;
   },
   experimental: {
     images: {
-      unoptimized: true,
-    },
-  },
+      unoptimized: true
+    }
+  }
 };
 
 module.exports = nextConfig;

@@ -1,6 +1,6 @@
-import path from "path";
-import { promises as fs } from "fs";
-import type { ParsedUrlQuery } from "querystring";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import type { MarkdownContent } from "../components";
@@ -9,34 +9,32 @@ import { getTitle } from "../utils/markdown";
 
 const pages = ["sponsor", "patrons", "about"] as const;
 
-interface PageParams extends ParsedUrlQuery {
+interface PageParameters extends ParsedUrlQuery {
   page: typeof pages[number];
 }
 
-interface PageProps {
+interface PageProperties {
   title: string;
   content: MarkdownContent;
 }
 
-const Page: NextPage<PageProps> = ({ title, content }) => {
-  return (
-    <div className="h-full flex justify-center items-center">
-      <article className="max-w-full p-8">
-        <Head>
-          <title>{`${title} - Aadit M Shah`}</title>
-        </Head>
-        <Markdown content={content} />
-      </article>
-    </div>
-  );
-};
+const Page: NextPage<PageProperties> = ({ title, content }: PageProperties) => (
+  <div className="h-full flex justify-center items-center">
+    <article className="max-w-full p-8">
+      <Head>
+        <title>{`${title} - Aadit M Shah`}</title>
+      </Head>
+      <Markdown content={content} />
+    </article>
+  </div>
+);
 
-export const getStaticPaths: GetStaticPaths<PageParams> = () => ({
+const getStaticPaths: GetStaticPaths<PageParameters> = () => ({
   paths: pages.map((page) => ({ params: { page } })),
-  fallback: false,
+  fallback: false
 });
 
-export const getStaticProps: GetStaticProps<PageProps, PageParams> = async (
+const getStaticProps: GetStaticProps<PageProperties, PageParameters> = async (
   context
 ) => {
   const page = context.params?.page;
@@ -48,4 +46,5 @@ export const getStaticProps: GetStaticProps<PageProps, PageParams> = async (
   return { props: { title, content } };
 };
 
+export { getStaticPaths, getStaticProps };
 export default Page;

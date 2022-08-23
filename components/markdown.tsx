@@ -1,18 +1,18 @@
 import type { Root as MarkdownContent } from "mdast";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkUnwrapImages from "remark-unwrap-images";
-import remarkRehype from "remark-rehype";
-import rehypeReact from "rehype-react";
+import Image from "next/image";
+import Link from "next/link";
 import type { ComponentType } from "react";
 import { createElement, Fragment } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import rehypeReact from "rehype-react";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import remarkUnwrapImages from "remark-unwrap-images";
+import { unified } from "unified";
 import { assets } from "../assets";
 
-const absolutePath = /^\//;
-const assetFormat = /^(\w+)-(\d+)x(\d+)(-priority)?$/;
+const assetFormat =
+  /^(?<name>\w+)-(?<width>\d+)x(?<height>\d+)(?<priority>-priority)?$/u;
 
 const components: {
   [TagName in keyof JSX.IntrinsicElements]?: ComponentType<
@@ -29,8 +29,9 @@ const components: {
   a: ({ href, children }) => {
     if (typeof href === "undefined") throw new Error("href missing");
 
-    return absolutePath.test(href) ? (
+    return href.startsWith("/") ? (
       <Link href={href}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- href provided by Link */}
         <a className="text-orange font-bold">{children}</a>
       </Link>
     ) : (
@@ -48,15 +49,15 @@ const components: {
 
     if (result === null) throw new Error("asset format invalid");
 
-    const key = result[1] || "";
-    const width = Number.parseInt(result[2] || "", 10);
-    const height = Number.parseInt(result[3] || "", 10);
+    const key = result[1] ?? "";
+    const width = Number.parseInt(result[2] ?? "", 10);
+    const height = Number.parseInt(result[3] ?? "", 10);
     const priority = result[4] === "-priority";
 
     return (
       <figure className="mt-4 text-center">
         <Image
-          src={assets[key] || ""}
+          src={assets[key] ?? ""}
           alt={alt}
           width={width}
           height={height}
@@ -73,7 +74,7 @@ const components: {
   ),
   code: ({ children }) => (
     <code className="text-sm text-orange">{children}</code>
-  ),
+  )
 };
 
 const processor = unified()
@@ -83,13 +84,14 @@ const processor = unified()
   .use(remarkRehype)
   .use(rehypeReact, { createElement, Fragment, components });
 
-interface MarkdownProps {
+interface MarkdownProperties {
   content: MarkdownContent;
 }
 
-export const Markdown = ({ content }: MarkdownProps) =>
+const Markdown = ({ content }: MarkdownProperties) =>
   processor.stringify(processor.runSync(content));
 
-export const parseMarkdown = (text: string) => processor.parse(text);
+const parseMarkdown = (text: string) => processor.parse(text);
 
-export type { MarkdownContent };
+export type { Root as MarkdownContent } from "mdast";
+export { Markdown, parseMarkdown };

@@ -1,8 +1,9 @@
-import classNames from "classnames";
+import classnames from "classnames";
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Favicon from "../public/favicon.svg";
+// eslint-disable-next-line import/no-unassigned-import -- This is a stylesheet.
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     Sponsor: "/sponsor",
     Patrons: "/patrons",
     About: "/about",
-    Contact: "/contact",
+    Contact: "/contact"
   });
 
   return (
@@ -32,19 +33,20 @@ function MyApp({ Component, pageProps }: AppProps) {
             <h1 className="sr-only">Main Navigation</h1>
             {mainNav.map(([name, href], index) => (
               <Link key={name} href={href}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- href provided by Link */}
                 <a
-                  className={classNames(
+                  className={classnames(
                     "px-2 py-1 rounded-t-md text-sm sm:mt-4 sm:text-base font-bold",
                     href === router.pathname ||
                       (router.pathname === "/[page]" &&
-                        href === `/${router.query.page}`) ||
+                        href === `/${String(router.query.page)}`) ||
                       (href === "/blog/page/1" &&
                         router.pathname.startsWith("/blog/"))
                       ? "bg-yellow"
                       : "bg-orange hover:bg-yellow",
                     {
                       "ml-auto": index === 0,
-                      "mr-auto": index === mainNav.length - 1,
+                      "mr-auto": index === mainNav.length - 1
                     }
                   )}
                 >
@@ -59,6 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div className="grow flex max-w-full sm:max-w-3xl">
           <div className="grow flex max-w-full px-2 py-4">
             <main className="grow max-w-full rounded-md bg-white">
+              {/* eslint-disable-next-line react/jsx-props-no-spreading -- Next.js syntax */}
               <Component {...pageProps} />
             </main>
           </div>

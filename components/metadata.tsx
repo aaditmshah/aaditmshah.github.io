@@ -1,7 +1,6 @@
-import classNames from "classnames";
 import Link from "next/link";
 
-export interface MetaDataProps {
+interface MetaDataProperties {
   published: number;
   modified: number;
   tags: string[];
@@ -22,28 +21,26 @@ const dateTime = (time: number) => {
 
 const tagLink = (tag: string) => (
   <Link href={`/blog/tags/${tag}/page/1`}>
+    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- href provided by Link */}
     <a className="text-orange font-bold">{tag}</a>
   </Link>
 );
 
-export const MetaData = ({ published, modified, tags }: MetaDataProps) => {
+export const MetaData = ({ published, modified, tags }: MetaDataProperties) => {
   const lastTagIndex = tags.length - 1;
 
   if (lastTagIndex < 0) throw new Error("no tags");
 
-  const metadata = {
-    "First Published": dateTime(published),
-    "Last Modified": dateTime(modified),
-  };
-
   return (
     <dl className="mt-2 flex flex-wrap gap-x-4 text-sm">
-      {Object.entries(metadata).map(([key, value]) => (
-        <div key={key} className="flex">
-          <dt className="font-bold after:content-[':\00A0']">{key}</dt>
-          <dd>{value}</dd>
-        </div>
-      ))}
+      <div className="flex">
+        <dt className="font-bold after:content-[':\00A0']">First Published</dt>
+        <dd>{dateTime(published)}</dd>
+      </div>
+      <div className="flex">
+        <dt className="font-bold after:content-[':\00A0']">Last Modified</dt>
+        <dd>{dateTime(modified)}</dd>
+      </div>
       <div className="flex flex-wrap">
         <dt className="font-bold after:content-[':\00A0'] after:last:content-none">
           Tags
@@ -61,3 +58,5 @@ export const MetaData = ({ published, modified, tags }: MetaDataProps) => {
     </dl>
   );
 };
+
+export type { MetaDataProperties };
