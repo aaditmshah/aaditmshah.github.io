@@ -4,21 +4,13 @@ import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import type { MarkdownContent, MetaDataProperties } from "../../../components";
-import { Markdown, parseMarkdown, MetaData, Paging } from "../../../components";
-import { getTimestamps } from "../../../utils/date";
-import { getPostData, markdown } from "../../../utils/markdown";
-
-const pageSize = 5;
+import { Markdown, MetaData, Paging } from "../../../components";
+import { markdown } from "../../../utils/markdown";
+import type { Post } from "../../../utils/posts";
+import { pageSize, getPosts } from "../../../utils/posts";
 
 interface BlogParameters extends ParsedUrlQuery {
   pageNo: string;
-}
-
-interface Post extends MetaDataProperties {
-  name: string;
-  title: string;
-  summary: MarkdownContent;
 }
 
 interface BlogProperties {
@@ -105,19 +97,7 @@ const getStaticProps: GetStaticProps<BlogProperties, BlogParameters> = async (
   const pageIndex = Number.parseInt(pageNo, 10) - 1;
   const directoryPath = path.join(process.cwd(), "content/blog");
   const fileNames = await fs.readdir(directoryPath);
-  const posts: Post[] = [];
-  for (const fileName of fileNames) {
-    const result = markdown.exec(fileName);
-    if (result !== null) {
-      const name = result[1] ?? "";
-      const filePath = path.join(directoryPath, fileName);
-      const text = await fs.readFile(filePath, "utf8");
-      const content = parseMarkdown(text);
-      const { title, tags, summary } = getPostData(content);
-      const { published, modified } = await getTimestamps(filePath);
-      posts.push({ name, title, tags, summary, published, modified });
-    }
-  }
+  const posts = await getPosts(directoryPath, fileNames);
   posts.sort((a, b) => b.published - a.published);
   const totalPages = Math.ceil(posts.length / pageSize);
   const start = pageIndex * pageSize;

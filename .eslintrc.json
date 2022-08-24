@@ -16,7 +16,6 @@
     "commonjs": true
   },
   "rules": {
-    "no-await-in-loop": "off",
     "no-octal-escape": "off",
     "promise/no-native": "off",
     "import/no-commonjs": "off",

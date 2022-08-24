@@ -5,30 +5,14 @@ import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useCallback } from "react";
-import type {
-  MarkdownContent,
-  MetaDataProperties
-} from "../../../../../components";
-import {
-  Markdown,
-  parseMarkdown,
-  MetaData,
-  Paging
-} from "../../../../../components";
-import { getTimestamps } from "../../../../../utils/date";
-import { getPostData, markdown } from "../../../../../utils/markdown";
-
-const pageSize = 5;
+import { Markdown, MetaData, Paging } from "../../../../../components";
+import { markdown } from "../../../../../utils/markdown";
+import type { Post } from "../../../../../utils/posts";
+import { pageSize, getTags, getPosts } from "../../../../../utils/posts";
 
 interface TagParameters extends ParsedUrlQuery {
   tag: string;
   pageNo: string;
-}
-
-interface Post extends MetaDataProperties {
-  name: string;
-  title: string;
-  summary: MarkdownContent;
 }
 
 interface TagProperties {
@@ -105,17 +89,19 @@ const Tag: NextPage<TagProperties> = ({
 const getStaticPaths: GetStaticPaths<TagParameters> = async () => {
   const directoryPath = path.join(process.cwd(), "content/blog");
   const fileNames = await fs.readdir(directoryPath);
-  const tagMap = new Map<string, number>();
+  const promises: Promise<string[]>[] = [];
   for (const fileName of fileNames) {
     if (markdown.test(fileName)) {
       const filePath = path.join(directoryPath, fileName);
-      const text = await fs.readFile(filePath, "utf8");
-      const content = parseMarkdown(text);
-      const { tags } = getPostData(content);
-      for (const tag of tags) {
-        const count = tagMap.get(tag) ?? 0;
-        tagMap.set(tag, count + 1);
-      }
+      promises.push(getTags(filePath));
+    }
+  }
+  const tagBag = await Promise.all(promises);
+  const tagMap = new Map<string, number>();
+  for (const tags of tagBag) {
+    for (const tag of tags) {
+      const count = tagMap.get(tag) ?? 0;
+      tagMap.set(tag, count + 1);
     }
   }
   const paths = [...tagMap].flatMap(([tag, length]) => {
@@ -137,21 +123,8 @@ const getStaticProps: GetStaticProps<TagProperties, TagParameters> = async (
   const pageIndex = Number.parseInt(pageNo, 10) - 1;
   const directoryPath = path.join(process.cwd(), "content/blog");
   const fileNames = await fs.readdir(directoryPath);
-  const posts: Post[] = [];
-  for (const fileName of fileNames) {
-    const result = markdown.exec(fileName);
-    if (result !== null) {
-      const name = result[1] ?? "";
-      const filePath = path.join(directoryPath, fileName);
-      const text = await fs.readFile(filePath, "utf8");
-      const content = parseMarkdown(text);
-      const { title, tags, summary } = getPostData(content);
-      const { published, modified } = await getTimestamps(filePath);
-      if (tags.includes(tag)) {
-        posts.push({ name, title, tags, summary, published, modified });
-      }
-    }
-  }
+  const allPosts = await getPosts(directoryPath, fileNames);
+  const posts = allPosts.filter(({ tags }) => tags.includes(tag));
   posts.sort((a, b) => b.published - a.published);
   const totalPages = Math.ceil(posts.length / pageSize);
   const start = pageIndex * pageSize;
