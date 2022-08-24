@@ -2,9 +2,9 @@ import classnames from "classnames";
 import type { AppProps } from "next/app";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Favicon from "../public/favicon.svg";
+import Favicon from "public/favicon.svg";
 // eslint-disable-next-line import/no-unassigned-import -- This is a stylesheet.
-import "../styles/globals.css";
+import "styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="bg-dark">
         <div className="sm:flex sm:justify-between sm:max-w-3xl sm:mx-auto sm:px-2">
           <header className="flex justify-center py-1 sm:py-2">
+            {/* eslint-disable-next-line react/forbid-component-props -- External Component */}
             <Favicon className="h-7 w-7 sm:h-8 sm:w-8" />
             <h1 className="ml-1 text-xl font-bold sm:ml-2 sm:text-2xl">
               <span className="text-yellow">Aadit</span>&nbsp;
@@ -74,4 +75,5 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
+// eslint-disable-next-line import/no-unused-modules -- Next.js Custom App
 export default MyApp;

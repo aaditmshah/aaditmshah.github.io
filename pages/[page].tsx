@@ -3,9 +3,9 @@ import path from "node:path";
 import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import type { MarkdownContent } from "../components";
-import { Markdown, parseMarkdown } from "../components";
-import { getTitle } from "../utils/markdown";
+import type { MarkdownContent } from "components/markdown";
+import { Markdown, parseMarkdown } from "components/markdown";
+import { getTitle } from "utils/markdown";
 
 const pages = ["sponsor", "patrons", "about"] as const;
 
@@ -46,5 +46,7 @@ const getStaticProps: GetStaticProps<PageProperties, PageParameters> = async (
   return { props: { title, content } };
 };
 
+// eslint-disable-next-line import/no-unused-modules -- Next.js SSG Functions
 export { getStaticPaths, getStaticProps };
+// eslint-disable-next-line import/no-unused-modules -- Next.js Page Component
 export default Page;

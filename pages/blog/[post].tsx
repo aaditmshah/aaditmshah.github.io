@@ -3,10 +3,12 @@ import path from "node:path";
 import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import type { MarkdownContent, MetaDataProperties } from "../../components";
-import { Markdown, parseMarkdown, MetaData } from "../../components";
-import { getTimestamps } from "../../utils/date";
-import { getPostData, markdown } from "../../utils/markdown";
+import type { MarkdownContent } from "components/markdown";
+import { Markdown, parseMarkdown } from "components/markdown";
+import type { MetaDataProperties } from "components/metadata";
+import { MetaData } from "components/metadata";
+import { getTimestamps } from "utils/date";
+import { getPostData, markdown } from "utils/markdown";
 
 interface PostParameters extends ParsedUrlQuery {
   post: string;
@@ -63,5 +65,7 @@ const getStaticProps: GetStaticProps<PostProperties, PostParameters> = async (
   return { props: { title, content, published, modified, tags } };
 };
 
+// eslint-disable-next-line import/no-unused-modules -- Next.js SSG Functions
 export { getStaticPaths, getStaticProps };
+// eslint-disable-next-line import/no-unused-modules -- Next.js Page Component
 export default Post;

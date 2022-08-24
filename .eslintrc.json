@@ -16,13 +16,10 @@
     "commonjs": true
   },
   "rules": {
-    "no-octal-escape": "off",
+    "eslint-comments/no-use": "off",
     "promise/no-native": "off",
-    "import/no-commonjs": "off",
     "import/no-relative-parent-imports": "off",
-    "import/no-unused-modules": "off",
-    "unicorn/filename-case": "off",
-    "unicorn/prefer-module": "off"
+    "unicorn/filename-case": "off"
   },
   "overrides": [
     {
@@ -40,7 +37,6 @@
       },
       "rules": {
         "@typescript-eslint/prefer-readonly-parameter-types": "off",
-        "react/forbid-component-props": "off",
         "react/jsx-filename-extension": [
           "error",
           { "extensions": [".jsx", ".tsx"] }

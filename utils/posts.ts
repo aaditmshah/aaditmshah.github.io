@@ -1,9 +1,10 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import type { MarkdownContent, MetaDataProperties } from "../components";
-import { parseMarkdown } from "../components";
 import { getTimestamps } from "./date";
 import { getPostData, markdown } from "./markdown";
+import type { MarkdownContent } from "components/markdown";
+import { parseMarkdown } from "components/markdown";
+import type { MetaDataProperties } from "components/metadata";
 
 const pageSize = 5;
 

@@ -9,7 +9,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkUnwrapImages from "remark-unwrap-images";
 import { unified } from "unified";
-import { assets } from "../assets";
+import { assets } from "assets";
 
 const assetFormat =
   /^(?<name>\w+)-(?<width>\d+)x(?<height>\d+)(?<priority>-priority)?$/u;

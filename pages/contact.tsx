@@ -18,10 +18,12 @@ const Contact: NextPage = () => (
       </p>
       <nav className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
         <a href="mailto:aaditmshah@aadit.codes" className="flex">
+          {/* eslint-disable-next-line react/forbid-component-props -- External Component */}
           <FontAwesomeIcon icon={faEnvelope} className="h-6 w-6" />
           <h2 className="ml-1 text-base font-bold">aaditmshah@aadit.codes</h2>
         </a>
         <a href="https://wa.me/917400038006" className="flex">
+          {/* eslint-disable-next-line react/forbid-component-props -- External Component */}
           <FontAwesomeIcon icon={faWhatsapp} className="h-6 w-6" />
           <h2 className="ml-1 text-base font-bold">+91 74000-38006</h2>
         </a>
@@ -34,4 +36,5 @@ const Contact: NextPage = () => (
   </div>
 );
 
+// eslint-disable-next-line import/no-unused-modules -- Next.js Page Component
 export default Contact;

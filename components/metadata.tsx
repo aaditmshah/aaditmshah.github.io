@@ -34,19 +34,23 @@ export const MetaData = ({ published, modified, tags }: MetaDataProperties) => {
   return (
     <dl className="mt-2 flex flex-wrap gap-x-4 text-sm">
       <div className="flex">
+        {/* eslint-disable-next-line no-octal-escape -- Tailwind Unicode Escape */}
         <dt className="font-bold after:content-[':\00A0']">First Published</dt>
         <dd>{dateTime(published)}</dd>
       </div>
       <div className="flex">
+        {/* eslint-disable-next-line no-octal-escape -- Tailwind Unicode Escape */}
         <dt className="font-bold after:content-[':\00A0']">Last Modified</dt>
         <dd>{dateTime(modified)}</dd>
       </div>
       <div className="flex flex-wrap">
+        {/* eslint-disable-next-line no-octal-escape -- Tailwind Unicode Escape */}
         <dt className="font-bold after:content-[':\00A0'] after:last:content-none">
           Tags
         </dt>
         {tags.map((tag, index) =>
           index < lastTagIndex ? (
+            /* eslint-disable-next-line no-octal-escape -- Tailwind Unicode Escape */
             <dd key={tag} className="after:content-[',\00A0']">
               {tagLink(tag)}
             </dd>

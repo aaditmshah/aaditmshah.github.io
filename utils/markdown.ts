@@ -1,6 +1,6 @@
 import { parse } from "yaml";
-import type { MarkdownContent } from "../components";
 import { string, array, object } from "./decoders";
+import type { MarkdownContent } from "components/markdown";
 
 const decoder = object({ title: string, tags: array(string) });
 

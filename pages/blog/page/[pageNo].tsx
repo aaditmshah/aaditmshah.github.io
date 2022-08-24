@@ -4,10 +4,12 @@ import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Markdown, MetaData, Paging } from "../../../components";
-import { markdown } from "../../../utils/markdown";
-import type { Post } from "../../../utils/posts";
-import { pageSize, getPosts } from "../../../utils/posts";
+import { Markdown } from "components/markdown";
+import { MetaData } from "components/metadata";
+import { Paging } from "components/paging";
+import { markdown } from "utils/markdown";
+import type { Post } from "utils/posts";
+import { pageSize, getPosts } from "utils/posts";
 
 interface BlogParameters extends ParsedUrlQuery {
   pageNo: string;
@@ -113,5 +115,7 @@ const getStaticProps: GetStaticProps<BlogProperties, BlogParameters> = async (
   };
 };
 
+// eslint-disable-next-line import/no-unused-modules -- Next.js SSG Functions
 export { getStaticPaths, getStaticProps };
+// eslint-disable-next-line import/no-unused-modules -- Next.js Page Component
 export default Blog;
