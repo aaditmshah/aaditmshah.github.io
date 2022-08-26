@@ -12,4 +12,5 @@ If you use [my open-source code](https://github.com/aaditmshah) or if you read m
 
 ## One-time sponsorship
 
+- [Buy me a Ko-fi](https://ko-fi.com/aaditmshah)
 - [Buy me a coffee](https://www.buymeacoffee.com/aaditmshah)
