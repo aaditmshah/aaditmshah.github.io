@@ -57,6 +57,7 @@
     "is-ci": "3.0.1",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
+    "typecraft": "0.1.1",
     "typescript": "4.7.4"
   }
 }

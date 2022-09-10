@@ -1,8 +1,8 @@
+import { string, array, object, cast } from "typecraft";
 import { parse } from "yaml";
-import { string, array, object } from "./decoders";
 import type { MarkdownContent } from "components/markdown";
 
-const decoder = object({ title: string, tags: array(string) });
+const castFrontmatter = cast(object({ title: string, tags: array(string) }));
 
 const markdown = /(?<filename>.+)\.md$/u;
 
@@ -29,7 +29,13 @@ const getPostData = ({
   if (typeof abstract === "undefined" || abstract.type !== "paragraph") {
     throw new Error("abstract missing");
   }
-  const { title, tags } = decoder.decode(parse(frontmatter.value));
+  const result = castFrontmatter(parse(frontmatter.value));
+  if (result.status === "failure") {
+    // eslint-disable-next-line no-console -- contains debugging information
+    console.error(result);
+    throw new TypeError("could not typecast the frontmatter");
+  }
+  const { title, tags } = result.value;
   const summary: MarkdownContent = {
     type: "root",
     children: [abstract]
