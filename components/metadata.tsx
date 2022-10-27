@@ -62,5 +62,3 @@ export const MetaData = ({ published, modified, tags }: MetaDataProperties) => {
     </dl>
   );
 };
-
-export type { MetaDataProperties };

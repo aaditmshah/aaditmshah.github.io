@@ -4,10 +4,10 @@ import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Markdown } from "components/markdown";
+import { ArticleContentComponent } from "components/demark";
 import { MetaData } from "components/metadata";
 import { Paging } from "components/paging";
-import { markdown } from "utils/markdown";
+import { demark } from "utils/demark";
 import type { Post } from "utils/posts";
 import { pageSize, getPosts } from "utils/posts";
 
@@ -48,28 +48,26 @@ const Blog: NextPage<BlogProperties> = ({
           pageNo={pageNo}
           getPageLink={getPageLink}
         />
-        {posts.map(
-          ({ name, title: postTitle, summary, published, modified, tags }) => (
-            <article key={name} className="mt-4">
-              <header>
-                <Link href={`/blog/${name}`}>
-                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- href provided by Link */}
-                  <a>
-                    <h1 className="inline font-bold text-2xl text-orange">
-                      {postTitle}
-                    </h1>
-                  </a>
-                </Link>
-                <MetaData
-                  published={published}
-                  modified={modified}
-                  tags={tags}
-                />
-              </header>
-              <Markdown content={summary} />
-            </article>
-          )
-        )}
+        {posts.map(({ name, article, published, modified }) => (
+          <article key={name} className="mt-4">
+            <header>
+              <Link href={`/blog/${name}`}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- href provided by Link */}
+                <a>
+                  <h1 className="inline font-bold text-2xl text-orange">
+                    {article.title}
+                  </h1>
+                </a>
+              </Link>
+              <MetaData
+                published={published}
+                modified={modified}
+                tags={article.tags}
+              />
+            </header>
+            <ArticleContentComponent content={{ ...article, sections: [] }} />
+          </article>
+        ))}
         <Paging
           totalPages={totalPages}
           pageNo={pageNo}
@@ -83,7 +81,7 @@ const Blog: NextPage<BlogProperties> = ({
 const getStaticPaths: GetStaticPaths<BlogParameters> = async () => {
   const directoryPath = path.join(process.cwd(), "content/blog");
   const fileNames = await fs.readdir(directoryPath);
-  const { length } = fileNames.filter((fileName) => markdown.test(fileName));
+  const { length } = fileNames.filter((fileName) => demark.test(fileName));
   const totalPages = Math.ceil(length / pageSize);
   const paths = Array.from({ length: totalPages }, (_, index) => ({
     params: { pageNo: String(index + 1) }

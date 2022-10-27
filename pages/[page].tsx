@@ -3,9 +3,9 @@ import path from "node:path";
 import type { ParsedUrlQuery } from "node:querystring";
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import type { MarkdownContent } from "components/markdown";
-import { Markdown, parseMarkdown } from "components/markdown";
-import { getTitle } from "utils/markdown";
+import { ArticleComponent } from "components/demark";
+import type { Article } from "utils/demark";
+import { parseArticle } from "utils/demark";
 
 const pages = ["sponsor", "patrons", "about"] as const;
 
@@ -14,17 +14,16 @@ interface PageParameters extends ParsedUrlQuery {
 }
 
 interface PageProperties {
-  title: string;
-  content: MarkdownContent;
+  article: Article;
 }
 
-const Page: NextPage<PageProperties> = ({ title, content }: PageProperties) => (
+const Page: NextPage<PageProperties> = ({ article }: PageProperties) => (
   <div className="h-full flex justify-center items-center">
     <article className="max-w-full p-8">
       <Head>
-        <title>{`${title} - Aadit M Shah`}</title>
+        <title>{`${article.title} - Aadit M Shah`}</title>
       </Head>
-      <Markdown content={content} />
+      <ArticleComponent article={article} />
     </article>
   </div>
 );
@@ -39,11 +38,10 @@ const getStaticProps: GetStaticProps<PageProperties, PageParameters> = async (
 ) => {
   const page = context.params?.page;
   if (typeof page === "undefined") throw new Error("invalid page name");
-  const fileName = path.join(process.cwd(), `content/${page}.md`);
-  const text = await fs.readFile(fileName, "utf8");
-  const content = parseMarkdown(text);
-  const title = getTitle(content);
-  return { props: { title, content } };
+  const fileName = path.join(process.cwd(), `content/${page}.dm`);
+  const bytes = await fs.readFile(fileName);
+  const article = parseArticle(bytes);
+  return { props: { article } };
 };
 
 // eslint-disable-next-line import/no-unused-modules -- Next.js SSG Functions

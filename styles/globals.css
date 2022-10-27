@@ -6,10 +6,6 @@
   @apply h-full;
 }
 
-h2 > a {
-  @apply text-sm;
-}
-
 /*
     https://github.com/tailwindlabs/tailwindcss/discussions/2394
     https://github.com/tailwindlabs/tailwindcss/pull/5732
